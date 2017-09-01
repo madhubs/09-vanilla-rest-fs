@@ -1,19 +1,60 @@
-// const storage = require('../lib/storage');
-// const router = require('../lib/router');
-
 'use strict';
 
-describe('ModuleName', function() {
-  beforeAll(() => {});
-  afterAll(() => {});
-  describe('default properties', () => {
-    test('should have ...', done => {
-      expect(true).toBeTrue;
-      done();
+const server = require('../server');
+// const storage = require('../lib/storage');
+// const router = require('../lib/router');
+const superagent = require('superagent');
+
+
+//This is the template we were given but I don't completely understand beforeAll and afterAll.
+describe('This is a test to make sure server.js is working...', function() {
+  // beforeAll(() => {});
+  afterAll((done) => {
+    server.close(done);
+  });
+
+  //   describe('default properties', () => {
+  //     test('should have ...', done => {
+  //       expect(true).toBeTrue;
+  //       done();
+  //     });
+  //   });
+  // });
+
+
+  describe('POST method, endpoint', ()=>{
+    test('POST should return status code 201 and response', done => {
+      superagent.post('localhost:3000/api/toy')
+        .set('Content-Type', 'application/json')
+        .send({})
+        .end((err, res)=> {
+          expect(err).not.toBeNull();
+          expect(res.status).toBe(400);
+          done();
+        });
+    });
+    test('Should return name and desc of toy user posted', done=> {
+      superagent.post('localhost:3000/api/toy')
+        .type('application/json')
+        .send({
+          name: 'barney',
+          desc: 'purple dino',
+          price: '$10',
+          material: 'plastic'
+        })
+        .end((err, res)=> {
+          this.toy = JSON.parse(res.text);
+          this.aNewID = res.body._id;
+          expect(this.toy.name).toEqual('barney');
+          expect(this.toy.material).toEqual('plastic');
+          expect(this.toy.desc).toEqual('purple dino');
+          expect(this.toy.price).toEqual('$10');
+          expect(res.status).toEqual(201);
+          done();
+        });
     });
   });
 });
-
 
 
 
