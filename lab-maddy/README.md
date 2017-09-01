@@ -9,14 +9,13 @@ npm run debugger
   > node inspect server.js
 
 
-
-
-
 # Documentation:
   * What this API does:
   This project is practice in creating a basic API from scratch. We have an object constructor making "toy" objects with four parameters (toy name, toy description, material used (ie- plastic), and the price of the toy). The goal is to POST (create) this toy object, PUT, GET and DELETE this object from the server.
-      * Practice using promise constructs to manage asynchronous code.
-      * Practice creating a vanilla RESTful API with in-memory persistence.
+
+    * How to save resource data to the file system for a layer of data persistence.
+    * How to refactor commonly used coding constructs into custom helper modules.
+
 
   * Any resources that helped me complete this assignment:
 

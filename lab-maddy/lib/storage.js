@@ -2,11 +2,7 @@
 
 const debug = require('debug')('http:storage');
 const Promise = require('bluebird');
-const fs = Promise.promisifyAll(require('fs'), {suffix: 'Prom'})
-
-// fs.readFileProm(`${__dirname}/../data/${schema}/${item_id}.json)
-// .then(...)
-// .catch(...)
+const fs = Promise.promisifyAll(require('fs'), {suffix: 'Prom'});
 
 const storage = module.exports = {};
 // const memory = {};
