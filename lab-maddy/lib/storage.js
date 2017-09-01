@@ -23,36 +23,51 @@ const storage = module.exports = {};
 //POST
 storage.create = function(schema, item) {
   debug('#create');
-  debugger;
-  if(!schema) return Promise.reject(new Error('cannot create; schema required'));
-  if(!item) return Promise.reject(new Error('cannot create; item required'));
-  if(!memory[schema]) memory[schema] = {};
+  // debugger;
+  return new Promise((resolve, reject)=> {
+    if(!schema) return reject(new Error('cannot create; schema required'));
+    if(!item) return reject(new Error('cannot create; item required'));
 
-  memory[schema][item._id] = item;
-  return Promise.resolve(item);
+    let json = JSON.stringify(item);
+
+    return fs.writeFileProm(`${__dirname}/../data/${schema}/${item._id}.json`, json)
+      .then(() => resolve(item))
+      .catch(console.error);
+  });
 };
+// if(!memory[schema]) memory[schema] = {};
 
 storage.fetchOne = function(schema, itemId) {
+  debug('#fetchOne');
   return new Promise((resolve, reject) => {
     if(!schema) return reject(new Error('cannot get item; schema required'));
     if(!itemId) return reject(new Error('cannon get item; itemId required'));
-    if(!memory[schema]) return reject(new Error('cannot get item; schema does not exist'));
-    if(!memory[schema][itemId]) return reject(new Error('cannot get item; item does not exist'));
 
-    return resolve(memory[schema][itemId]);
+    return fs.readFileProm(`${__dirname}/../data/${schema}/${itemId}.json`)
+      .then(buff => resolve(JSON.parse(buff.toString())))
+      .catch(err => {
+        console.error(err);
+        return err;
+      });
   });
 };
 
+storage.fetchAll = function() {
 
-//PUT
+};
+
 storage.update = function(schema, item) {
   debug('#update');
-  if(!schema) return Promise.reject(new Error('cannot create; schema required'));
-  if(!item) return Promise.reject(new Error('cannot create; item required'));
-  if(!memory[schema]) memory[schema] = {};
 
-  memory[schema][item._id] = item;
-  return resolve(item);
+  return new Promise((resolve, reject) => {
+    if(!schema) return reject(new Error('cannot update item; schema required'));
+    if(!item) return reject(new Error('cannot update item; updated item required'));
+
+  });
+};
+
+storage.delete = function() {
+
 };
 
 //DELETE
