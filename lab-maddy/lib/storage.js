@@ -3,6 +3,7 @@
 const debug = require('debug')('http:storage');
 const Promise = require('bluebird');
 const fs = Promise.promisifyAll(require('fs'), {suffix: 'Prom'});
+const Toy = require('../model/toy');
 
 const storage = module.exports = {};
 // const memory = {};
@@ -16,22 +17,24 @@ const storage = module.exports = {};
 //}
 // }
 
-//POST
+//POST (a storage method)
 storage.create = function(schema, item) {
   debug('#create');
   // debugger;
   return new Promise((resolve, reject)=> {
     if(!schema) return reject(new Error('cannot create; schema required'));
-    if(!item) return reject(new Error('cannot create; item required'));
+    if(!item.name || !item.desc) return reject(new Error('cannot create; item required'));
 
-    let json = JSON.stringify(item);
+    let newToy = new Toy(item.name, item.desc);
+
+    let json = JSON.stringify(newToy);
 
     return fs.writeFileProm(`${__dirname}/../data/${schema}/${item._id}.json`, json)
-      .then(() => resolve(item))
-      .catch(console.error);
+      .then(() => resolve(newToy)) //take the item and hand to route (route-toy.js) and then moved to the response model.
+      .catch(console.error);//or reject
   });
 };
-// if(!memory[schema]) memory[schema] = {};
+
 
 storage.fetchOne = function(schema, itemId) {
   debug('#fetchOne');
@@ -62,12 +65,7 @@ storage.update = function(schema, item) {
   });
 };
 
+//DELETE
 storage.delete = function() {
 
 };
-
-//DELETE
-
-// storage.delete = function() {
-//
-// };

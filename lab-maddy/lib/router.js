@@ -43,27 +43,27 @@ Router.prototype.delete = function(endpoint, callback) {
 Router.prototype.route = function() {
   return (req, res) => {
     debug('Someone knows I exist! They have made contact!!');
-    Promise.all([
+    Promise.all([ //ASYNC
       parseUrl(req),
       parseJson(req)
     ])
-    .then(() => {
-      if(typeof this.routes[req.method][req.url.pathname] === 'function') {
-        debug(`Houston, we've received a request: ${req.url.pathname} ${req.method}`);
-        this.routes[req.method][req.url.pathname](req, res);
-        return;
-      }
+      .then(() => {
+        if(typeof this.routes[req.method][req.url.pathname] === 'function') {
+          debug(`Houston, we've received a request: ${req.url.pathname} ${req.method}`);
+          this.routes[req.method][req.url.pathname](req, res);
+          return;
+        }
 
-      res.writeHead(404, {'Content-Type': 'text/plain'})
-      res.write('route not found');
-      res.end();
-    })
-    .catch(err => {
-      debug(`Houston, we have a problem: \n${err.message}`);
+        res.writeHead(404, {'Content-Type': 'text/plain'})
+        res.write('route not found');
+        res.end();
+      })
+      .catch(err => {
+        debug(`Houston, we have a problem: \n${err.message}`);
 
-      res.writeHead(400, {'Content-Type': 'text/plain'});
-      res.write('bad request; something went wrong in the router');
-      res.end() //if everything works properly we'll never hit the .catch
-    })
+        res.writeHead(400, {'Content-Type': 'text/plain'});
+        res.write('bad request; something went wrong in the router');
+        res.end() //if everything works properly we'll never hit the .catch
+      })
   }
 }

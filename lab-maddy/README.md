@@ -17,12 +17,12 @@
           3. Then start up nodemon in a separate terminal window.
 
 
-# To get an object in terminal, paste this to test:
+# To get an object in terminal, paste this to test (we're able to do this with the http client- superagent to make request on the server side to test for objects like this one):
 http POST :3000/api/toy name=barney desc='purple dino' price='$10' material=plastic
 
 # Example responses:
 * I realize the following is probably not what is being asked of me, but it's all I've got right now.
-    - Then the following bad request info is displayed in terminal:
+    - Then the following good request info is displayed in terminal:
     ```
     HTTP/1.1 201 Created
     Connection: keep-alive
