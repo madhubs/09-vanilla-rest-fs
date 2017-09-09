@@ -21,7 +21,7 @@ module.exports = function(router) {
     }
   });
 
-  router.get('/api/toy', (req, res) => {
+  router.get('/api/toy', (req, res) => { 
     debug('/api/toy GET');
     if(req.url.query._id) {
       storage.fetchOne('toy', req.url.query._id)

@@ -23,7 +23,7 @@
 
 #### Feature Tasks
 * documentation:
-  * write a paragraph about what your API does 
+  * write a paragraph about what your API does
     _(iterate on your docs, clean them up, etc)_
   * document any resources that helped you complete your assignment
   * define how another dev can 'get started' with your api on their own
@@ -72,6 +72,6 @@
  * successful status code of 204
 
 ## Rubric: 10pts
-* 2pts: Documentation 
+* 2pts: Documentation
 * 5pts: Feature Tasks
 * 3pts: Tests
