@@ -10,7 +10,7 @@ require('./route/route-toy')(router); //state is managed here
 // require('./route/route-kid')(router)
 // require('./route/route-family')(router)
 
-const server = module.exports = http.createServer(router.route());//to see what happens when we callt this see router.js for the big function callback.
+const server = module.exports = http.createServer(router.route());//to see what happens when we callt this see router.js for the big function callback. Passes in a request. Does an endpoint exist? since they're all the same, the methods are ...
 
 server.listen(PORT, () => debug(`Listening on ${PORT}`));
 

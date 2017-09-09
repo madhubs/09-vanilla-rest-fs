@@ -1,12 +1,10 @@
-'use strict';
+'use strict'
 
-describe('ModuleName', function(){
-  beforeAll(()=> { });
-  afterAll(()=> { });
+describe('ModuleName', function () {
   describe('default properties', () => {
-    test('should have...', done => {
-      expect(true).toBetrue;
-      done();
-    });
-  });
-});
+    test('should have ...', done => {
+      expect(true).toBeTrue
+      done()
+    })
+  })
+})
