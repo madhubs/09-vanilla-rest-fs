@@ -9,7 +9,7 @@
 
 # Any resources that helped me complete this assignment:
 
-#How another dev could 'get started' with my api on their own:
+# How another dev could 'get started' with my api on their own:
   - How do you clone this project?
   First fork from my repository, then clone from your repo, then create a branch.
   - How do you start using this project?
@@ -17,14 +17,14 @@
       2. You will need to install httpie in one terminal window.
       3. Then start up nodemon in a separate terminal window.
 
-# My to do list:
+## My to do list:
 1. PUT is not working after updating response.js on 9/10.
 2. Then tests!
   - valid requests (if i send a toy, make a toy)
   - Invalid requests (here's ONE edge case where someone could mess it all up)
   - Then we want to make sure when the tests "pass" (green check), WE MUST CHECK IF IT'S A FALSE POSITIVE
 
-# To POST, GET, PUT and DELETE an object on the server, paste requests in terminal to test (we're able to do this with the http client- superagent):
+## To POST, GET, PUT and DELETE an object on the server, paste requests in terminal to test (we're able to do this with the http client- superagent):
 
 ## Example POST request:
 Type or copy paste the following into terminal:
