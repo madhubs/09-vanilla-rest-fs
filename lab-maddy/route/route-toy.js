@@ -5,7 +5,9 @@ const storage = require('../lib/storage');
 const response = require('../lib/response');
 const debug = require('debug')('http:route-toy');
 
+//PUT
 module.exports = function(router) {
+  
   router.post('/api/toy', (req, res) => {
     debug('/api/toy POST');
     try {
@@ -21,7 +23,8 @@ module.exports = function(router) {
     }
   });
 
-  router.get('/api/toy', (req, res) => { 
+  // GET
+  router.get('/api/toy', (req, res) => {
     debug('/api/toy GET');
     if(req.url.query._id) {
       storage.fetchOne('toy', req.url.query._id)
@@ -44,6 +47,7 @@ module.exports = function(router) {
     res.end();
   });
 
+  // PUT
   router.put('/api/toy', (req, res) => {
     debug('/api/toy PUT');
     if (req.url.query._id) {
