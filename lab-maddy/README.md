@@ -18,19 +18,22 @@
       3. Then start up nodemon in a separate terminal window.
 
 # My to do list:
-1. Make sure the POSTS, GETS, PUTS and DELETES to the server are all working.
+1. PUT is not working after updating response.js on 9/10.
 2. Then tests!
   - valid requests (if i send a toy, make a toy)
   - Invalid requests (here's ONE edge case where someone could mess it all up)
   - Then we want to make sure when the tests "pass" (green check), WE MUST CHECK IF IT'S A FALSE POSITIVE
 
-# To create an object on the server, paste this in terminal to test (we're able to do this with the http client- superagent to make request on the server):
+# To POST, GET, PUT and DELETE an object on the server, paste requests in terminal to test (we're able to do this with the http client- superagent):
 
 ## Example POST request:
+Type or copy paste the following into terminal:
+```
 http POST :3000/api/toy name=barney desc='purple dino'
+```
 
 ## Example POST response:
-  - Then the following good request info is displayed in terminal:
+Then the following good request info should be displayed in terminal:
     ```
     HTTP/1.1 201 Created
     Connection: keep-alive
@@ -46,15 +49,70 @@ http POST :3000/api/toy name=barney desc='purple dino'
     ```
 
 ## Example GET request:
-http GET :3000/api/toy/ <copy whatever ID you get from the POST into the GET>????
-
+```
+http GET :3000/api/toy/toy?_id= <copy whatever ID you get from the POST into the GET>????
+```
 Example:
-http GET :3000/api/toy/99c0f97f-3ab0-484d-afc6-607733ee0e83
-
-
+```
+http GET localhost:3000/api/toy?_id=99c0f97f-3ab0-484d-afc6-607733ee0e83
+```
 ## Example GET response:
+Should see:
 ```
+HTTP/1.1 200 OK
+Connection: keep-alive
+Content-Type: application/json
+Date: Mon, 11 Sep 2017 01:37:08 GMT
+Transfer-Encoding: chunked
+
+{
+    "_id": "99c0f97f-3ab0-484d-afc6-607733ee0e83",
+    "desc": "purple dino",
+    "name": "barney"
+}
+
 ```
+
+## Example PUT request: STILL NOT WORKING.
+```
+http PUT localhost:3000/api/toy?_id='sameID name=differentName desc=differentDesc'
+```
+Example:
+```
+http PUT localhost:3000/api/toy?_id='99c0f97f-3ab0-484d-afc6-607733ee0e83' name=maddy desc=human
+```
+Kept seeing this, which is not what I thought we were supposed to see:
+```
+HTTP/1.1 204 No Content
+Connection: keep-alive
+Content-Type: text/plain
+Date: Mon, 11 Sep 2017 02:22:21 GMT
+```
+Then I decided to do a GET request:
+```
+http GET localhost:3000/api/toy?_id=99c0f97f-3ab0-484d-afc6-607733ee0e83
+```
+
+And saw this!!! Successful PUT!!!:
+```
+HTTP/1.1 200 OK
+Connection: keep-alive
+Content-Type: application/json
+Date: Mon, 11 Sep 2017 02:22:52 GMT
+Transfer-Encoding: chunked
+
+{
+    "_id": "99c0f97f-3ab0-484d-afc6-607733ee0e83",
+    "desc": "human",
+    "name": "maddy"
+}
+```
+
+## Example DELETE request:
+```
+http DELETE localhost:3000/api/toy?_id=99c0f97f-3ab0-484d-afc6-607733ee0e83
+```
+
 
 
 # Packages and commands to remember:
